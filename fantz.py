@@ -1,4 +1,5 @@
 import re
+import unittest
 
 
 def fantz(binary, number):
@@ -28,7 +29,14 @@ def find_part_in_binary(binary, possible_variants):
     return counter_of_parts
 
 
-if __name__ == '__main__':
+def count_result(binary, number):
+    possible_variants = fantz(binary, number)
+    binary = str(binary)
+    result = find_part_in_binary(binary, possible_variants)
+    return result
+
+
+def in_out_result():
     with open("fantz.in", "r") as file:
         for line in file:
             binary, number = line.split(" ")
@@ -38,8 +46,29 @@ if __name__ == '__main__':
         print("wrong input values, please try again")
         result = -1
     else:
-        possible_variants = fantz(binary, number)
-        binary = str(binary)
-        result = find_part_in_binary(binary, possible_variants)
+        result = count_result(binary, number);
     with open("fantz.out", "w") as file:
         file.write(str(result))
+
+
+class TestMethods(unittest.TestCase):
+    def test_one(self):
+        self.assertEqual(count_result("10110001", 4), 4)
+
+    def test_two(self):
+        self.assertEqual(count_result("10101010101", 5), 3)
+
+    def test_three(self):
+        self.assertEqual(count_result("[10110100", 9), 4)
+
+    def test_four(self):
+        self.assertEqual(count_result("10000100001", 4), 3)
+
+    def test_five(self):
+        self.assertEqual(count_result("1111101", 5), 1)
+
+
+if __name__ == '__main__':
+    in_out_result()
+    print("******unittest*******")
+    unittest.main()
