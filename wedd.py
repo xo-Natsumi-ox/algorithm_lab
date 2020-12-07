@@ -1,3 +1,6 @@
+import unittest
+
+
 def count_couple(couples):
     couples.sort()
     tribes = []
@@ -43,6 +46,23 @@ def count_boys_and_girls(tribes):
     return result
 
 
+class TestMethods(unittest.TestCase):
+    def test_one(self):
+        self.assertEqual(count_boys_and_girls(count_couple([(1, 3), (3, 5), (5, 7), (4, 6), (2, 4), (6, 8)])), 16)
+
+    def test_two(self):
+        self.assertEqual(count_boys_and_girls(count_couple([(4, 3), (2, 1), (1, 7), (8, 6), (6, 5)])), 11)
+
+    def test_three(self):
+        self.assertEqual(count_boys_and_girls(count_couple([(4, 2), (3, 1), (1, 5), (8, 6), (4, 6)])), 12)
+
+    def test_four(self):
+        self.assertEqual(count_boys_and_girls(count_couple([(1, 2), (3, 4), (5, 6), (4, 6)])), 4)
+
+    def test_five(self):
+        self.assertEqual(count_boys_and_girls(count_couple([(1, 3), (4, 5), (4, 6), (3, 8)])), 5)
+
+
 if __name__ == '__main__':
     couples_of_people = []
     with open("wedd.in", "r") as file:
@@ -52,12 +72,13 @@ if __name__ == '__main__':
             second = int(second)
             couples_of_people.append((first, second))
 
-    couples = [(1, 2), (8, 7), (3, 8), (8, 10), (1, 5)]
     length_of_couples = len(couples_of_people)
     if length_of_couples > 10000:
         print("too many couples are inputted or not at all")
     else:
-        result = count_boys_and_girls(count_couple(couples))
+        result = count_boys_and_girls(count_couple(couples_of_people))
         print(result)
+        print("******unittest*******")
+        unittest.main()
     with open("wedd.out", "w") as file:
         file.write(str(result))
