@@ -18,6 +18,11 @@ class TestMethods(unittest.TestCase):
     def test_five(self):
         self.assertEqual(naive_search("eeeeee", "eee"), [(0, 2), (1, 3), (2, 4), (3, 5)])
 
+    def test_empty_string(self):
+        self.assertEqual(naive_search("", "eee"), [])
+
+    def test_empty_substring(self):
+        self.assertEqual(naive_search("eee", ""), [])
 
 if __name__ == '__main__':
     unittest.main()

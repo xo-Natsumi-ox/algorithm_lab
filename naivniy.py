@@ -15,6 +15,8 @@ def naive_search(string, substring):
     result = []
     string_length = len(string)
     substring_length = len(substring)
+    if substring_length == 0:
+        return result
     for element_in_string in range(string_length - substring_length + 1):
         for element_in_substring in range(substring_length):
             if string[element_in_string + element_in_substring] != substring[element_in_substring]:
